@@ -1,6 +1,6 @@
-import {ACTION_CHANGE_INPUT} from "../Agify";
+import { ACTION_CHANGE_INPUT } from "../Agify";
 
-const initialState = {
+let initialState = {
     input: ''
 };
 

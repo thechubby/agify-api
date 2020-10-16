@@ -1,8 +1,8 @@
 import { ACTION_CHANGE_INPUT } from '../Agify';
 
-export const changeInput = (newInput: any) => {
+export const changeInput = (newInput: string) => {
     return {
-        type: 'ACTION_CHANGE_INPUT',
+        type: ACTION_CHANGE_INPUT,
         payload: newInput
     }
 }

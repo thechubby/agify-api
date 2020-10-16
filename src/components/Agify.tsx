@@ -14,14 +14,15 @@ export class Agify extends React.Component<{}, { result: string }> {
     }
 
     async onBtnClick() {
-        const response = await fetch(`https://api.agify.io?name=${this.state.input}`);
+        // @ts-ignore
+        const response = await fetch(`https://api.agify.io?name=${this.props.input}`);
         const data = await response.json();
         this.setState({result: data.age});
     }
 
     render(): React.ReactNode {
-        const dispatch = this.props.dispatch;
-        const { input, changeInput } = this.props;
+        // @ts-ignore
+        let { input, changeInput } = this.props;
         return (
             <div>
                 <p>Заполните имя (например michael) и нажмите на кнопку чтобы узнать предполагаемый возраст имени</p>
@@ -37,7 +38,7 @@ export class Agify extends React.Component<{}, { result: string }> {
                         }
                 />
                 <button onClick={this.onBtnClick}>Нажми на меня</button>
-                <p>Предполагаемый возраст: {this.state.result}</p>
+                <p>Предполагаемый возраст по имени: {this.state.result}</p>
             </div>
         );
     }
