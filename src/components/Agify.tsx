@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
+import {bindActionCreators, Dispatch} from "redux";
 import { changeInput } from "./store/actions";
 
 export const ACTION_CHANGE_INPUT = 'ACTION_CHANGE_INPUT';
@@ -10,20 +10,20 @@ interface StateInterface {
 }
 
 interface PropsInterface {
-    input: string
+    input: string,
+    changeInput: (newInput: string) => {}
 }
 
-export class Agify extends React.Component<{}, StateInterface, any> {
+export class Agify extends React.Component<PropsInterface, StateInterface> {
 
-    constructor(props: object) {
+    constructor(props: PropsInterface) {
         super(props);
         this.state = { result: '' };
         this.onBtnClick = this.onBtnClick.bind(this);
     }
 
     async onBtnClick() :Promise<void> {
-        
-        // @ts-ignore
+
         const response = await fetch(`https://api.agify.io?name=${this.props.input}`);
         const data = await response.json();
         this.setState({result: data.age});
@@ -31,7 +31,6 @@ export class Agify extends React.Component<{}, StateInterface, any> {
 
     render(): React.ReactNode {
 
-        // @ts-ignore
         let { input, changeInput } = this.props;
         return (
             <div>
@@ -60,7 +59,7 @@ const putStateToProps = (state: PropsInterface) :object => {
     };
 };
 
-const putActionsToProps = (dispatch: any) :object => {
+const putActionsToProps = (dispatch: Dispatch<any>) :object => {
     return {
         changeInput: bindActionCreators(changeInput, dispatch)
     }
