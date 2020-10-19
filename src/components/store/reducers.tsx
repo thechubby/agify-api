@@ -1,6 +1,10 @@
 import { ACTION_CHANGE_INPUT } from "../Agify";
 
-let initialState = {
+interface StateInterface {
+    input: string
+}
+
+const initialState: StateInterface = {
     input: ''
 };
 

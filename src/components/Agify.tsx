@@ -5,15 +5,24 @@ import { changeInput } from "./store/actions";
 
 export const ACTION_CHANGE_INPUT = 'ACTION_CHANGE_INPUT';
 
-export class Agify extends React.Component<{}, { result: string }> {
+interface StateInterface {
+    result: string
+}
 
-    constructor(props: any) {
+interface PropsInterface {
+    input: string
+}
+
+export class Agify extends React.Component<{}, StateInterface, { input: string }> {
+
+    constructor(props: object) {
         super(props);
         this.state = { result: '' };
         this.onBtnClick = this.onBtnClick.bind(this);
     }
 
-    async onBtnClick() {
+    async onBtnClick() :Promise<void> {
+        
         // @ts-ignore
         const response = await fetch(`https://api.agify.io?name=${this.props.input}`);
         const data = await response.json();
@@ -21,6 +30,7 @@ export class Agify extends React.Component<{}, { result: string }> {
     }
 
     render(): React.ReactNode {
+
         // @ts-ignore
         let { input, changeInput } = this.props;
         return (
@@ -44,13 +54,13 @@ export class Agify extends React.Component<{}, { result: string }> {
     }
 }
 
-const putStateToProps = (state: any) => {
+const putStateToProps = (state: PropsInterface) :object => {
     return {
         input: state.input
     };
 };
 
-const putActionsToProps= (dispatch: any) => {
+const putActionsToProps = (dispatch: any) :object => {
     return {
         changeInput: bindActionCreators(changeInput, dispatch)
     }
