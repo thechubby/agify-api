@@ -13,7 +13,7 @@ interface PropsInterface {
     input: string
 }
 
-export class Agify extends React.Component<{}, StateInterface, { input: string }> {
+export class Agify extends React.Component<{}, StateInterface, any> {
 
     constructor(props: object) {
         super(props);
