@@ -11,7 +11,7 @@ const store = createStore(rootReducer);
 
 ReactDOM.render(
     <Provider store={store}>
-        <Agify/>
+        <Agify changeInput={ (newInput: string) :any => {} }  input={ '' }/>
     </Provider>,
   document.getElementById('root')
 );
